@@ -1,0 +1,33 @@
+from kandinsky import draw_string
+from random import randint
+a=18 #222//12
+b=26 #320//12
+Liste=[[0 for col in range(b)] for lig in range(a)]
+for lig in range(a):
+  for col in range(b):
+    Liste[lig][col]=randint(1,100)%2
+    if Liste[lig][col] == 1:
+      draw_string("o",12*col+3,204-12*lig,'blue')
+Voisins=[[0 for col in range(b)] for lig in range(a)]
+Nouv=[[0 for col in range(b)] for lig in range(a)]
+
+for gen in range(50):
+  for i in range(a):
+    for j in range(b):
+      Voisins[i][j]=0
+      for k in [-1,0,1]:
+        for l in [-1,0,1]:
+          if (k,l)!=(0,0):
+            Voisins[i][j]+=Liste[(i+k)%a][(j+l)%b]
+
+  for m in range(a):
+    for n in range(b):
+      if ( Liste[m][n]==0 and Voisins[m][n]==3 ) or ( Liste[m][n]==1 and Voisins[m][n] in [2,3] ):
+        Nouv[m][n]=1
+        couleur='blue'
+      else:
+        Nouv[m][n]=0
+        couleur='white'
+      if Nouv[m][n]!=Liste[m][n] or Nouv[m][n]==1:
+        draw_string("o",12*n+3,204-12*m,couleur)
+      Liste[m][n]=Nouv[m][n]
