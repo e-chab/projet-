@@ -1,0 +1,14 @@
+
+def showtime():
+    sw = pyb.Switch()
+    while True:
+        display.fill(0)
+        y,M,d,wd,h,m,s,ms = rtc.datetime() # Format YYYY MM DD DayOfWeeek HH MM SS MS
+        display.text( f"{y} {M:02} {d}" ,20, 20)
+        display.text(f"{h} {m} {s:02}", 25, 35)
+        display.show()
+        time.sleep(1)
+        if (sw()):
+            detect()
+
+showtime()
