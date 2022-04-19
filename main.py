@@ -6,9 +6,6 @@ a=128
 b=64
 
 def showtime():
-#    sw = pyb.Switch()
-#    while True:
-#        afficheur.fill(0)
         y,M,d,wd,h,m,s,ms = rtc.datetime() # Format YYYY MM DD DayOfWeeek HH MM SS MS
         for i in range(18,102): 
           for j in range(18,40):
@@ -16,9 +13,6 @@ def showtime():
         afficheur.text( f"{d:02}/{M:02}/{y}" ,20, 20)
         afficheur.text(f"{h:02}:{m:02}:{s:02}", 30, 30)
         afficheur.show()
-#        time.sleep(1)
-#        if (sw()):
-#            detect()
         print(rtc.datetime())
 
 # afficheur branché en i2c (clock sur la pin B8 et data sur la pin B9)
@@ -32,8 +26,8 @@ afficheur.show()
 rtc = machine.RTC()
 # Initialise l'horloge temps réel. Datetime est un tuple de la forme :
 # (year, month, day[, hour[, minute[, second[, microsecond[, tzinfo]]]]])
-# Setup Date & Time
-# Example 19/04/2022 14:00
+# Initialisation de l'heure
+# Exemple 19/04/2022 14:00
 rtc.datetime((2022, 04, 19, 3, 14, 00, 0, 0))
 print(rtc.datetime())
 
@@ -58,8 +52,8 @@ while(True):
           afficheur.pixel(lig, col, 1) # Display one Dot
           afficheur.show()      
           showtime()
+        
     # Life
-
     for gen in range(100): # For 100 Générations !
       print(gen)
       for i in range(a):
@@ -81,7 +75,7 @@ while(True):
             Nouv[m][n]=0
             couleur=0
           if Nouv[m][n]!=Liste[m][n]:
-            afficheur.pixel(m, n, couleur) # Display Nouv Grid
+            afficheur.pixel(m, n, couleur) # Affiche la nouvelle Grille
             afficheur.show()
             showtime()
           Liste[m][n]=Nouv[m][n]
