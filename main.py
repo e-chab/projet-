@@ -1,6 +1,5 @@
 import ssd1306
 from random import randint
-# import gfx
 
 # Afficheur
 a=128
